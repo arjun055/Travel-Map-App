@@ -7,17 +7,21 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import {format} from "timeago.js";
 import Register from './register/Register';
+import Login from './login/Login';
 
 
 function App() {
 
-  const [currentuser,setCurrentUser] = useState(null);
+  const myStorage = window.localStorage;
+  const [currentuser,setCurrentUser] = useState(myStorage.getItem('user'));
   const [pins, setPins] = useState([]);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [newPlace,setNewPlace] = useState(null);
   const [title,setTitle] = useState(null);
   const [desc,setDesc] = useState(null);
   const [rating,setRating] = useState(0);
+  const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   const [viewState, setViewState]=useState({
     longitude: 77.5946,
     latitude: 12.9716,
@@ -84,6 +88,11 @@ function App() {
       console.log("error",err)
     }
   };
+
+  const handleLogout = ()=>{
+    myStorage.removeItem('user');
+    setCurrentUser(null);
+  }
 
   return (
     <div className="App">
@@ -169,16 +178,17 @@ function App() {
         }
 
         {currentuser ? 
-          (<button className='button logout'>Log out</button>):
+          (<button className='button logout' onClick={handleLogout}>Log out</button>):
           (
             <div className='buttons'>
-              <button className='button login'>Login</button>
-              <button className='button register'>Register</button>
+              <button className='button login' onClick={()=>setShowLogin(true)}>Login</button>
+              <button className='button register' onClick={()=>setShowRegister(true)}>Register</button>
             </div>
           )
         }
 
-        <Register />
+        {showRegister && <Register setShowRegister={setShowRegister}/>}
+        {showLogin && <Login setShowLogin={setShowLogin} myStorage={myStorage} setCurrentUser={setCurrentUser}/>}
       </Map >
     </div>
   );
