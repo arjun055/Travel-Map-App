@@ -17,8 +17,8 @@
     justify-content: space-between;
 }
 
-.logo{
-    color: teal;
+.registerContainer .logo{
+    color: slateblue !important;
     display: flex;
     align-items: center;
     font-weight: 700;
@@ -29,7 +29,7 @@
     border-radius: 5px;
     border: none;
     padding: 5px;
-    background-color: teal;
+    background-color: slateblue;
     color: white;
     cursor: pointer;
 }

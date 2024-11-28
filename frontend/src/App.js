@@ -25,7 +25,7 @@ function App() {
   const [viewState, setViewState]=useState({
     longitude: 77.5946,
     latitude: 12.9716,
-    zoom: 6,
+    zoom: 5,
   });
 
   //fetches all the pins when the page is loaded
