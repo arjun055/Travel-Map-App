@@ -7,7 +7,7 @@ import usersRoute from './routes/users.js';
 dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = 5500;
 
 app.use(express.json());
 
